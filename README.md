@@ -8,7 +8,7 @@
 
 当前展示从桌面 selected 中选出的 16 张真实作品，以及 bio 中的一张肖像。首批选择记录在 selection.json；当前的 Archive、页面顺序、版式和短句以 site/archives.json 为准。原名与数字编号的对照表仅保存在桌面的 selected-renaming-map.json，不上传到公开仓库。
 
-照片保存在 GitHub 仓库并经 GitHub Pages 提供访问。每张有 800px 缩略图、2000px 展示图，以及原始分辨率的 quality=95 WebP 高清副本；高清副本合计约 121MiB，只有点开大图后加载。它保留原始像素尺寸，但不是字节一致的 JPEG 原件，编码有损。不保留 EXIF、GPS 或 XMP。无水印、无下载按钮，但所有公开展示图片仍可被保存，不能依靠隐藏下载入口保护图片。
+照片保存在 GitHub 仓库并经 GitHub Pages 提供访问。每张有 800px 缩略图、1440px 展示图，以及原始分辨率的 quality=95 WebP 高清副本；高清副本合计约 121MiB，只有点开大图后加载。它保留原始像素尺寸，但不是字节一致的 JPEG 原件，编码有损。不保留 EXIF、GPS 或 XMP。无水印、无下载按钮，但所有公开展示图片仍可被保存，不能依靠隐藏下载入口保护图片。
 
 ## 摄影书排版
 
@@ -24,7 +24,7 @@ site/archives.json 定义左侧 Archive 及右侧每一页。每页的 photos �
 python3 scripts/import_photos.py '/安全备份盘/相册文件夹' --series 'Album name'
 ```
 
-工具递归读取 JPEG / PNG / WebP / TIFF，生成 800px 缩略图与 2000px 展示图，按 EXIF 方向旋转；带可识别 ICC 的照片转换为 sRGB。导出不保留 EXIF（包括 GPS）。不会改动或上传原图。RAW 应先在 Lightroom 等软件中导出带 sRGB 色彩配置的 JPEG/TIFF。
+工具递归读取 JPEG / PNG / WebP / TIFF，生成 800px 缩略图与 1440px 展示图，按 EXIF 方向旋转；带可识别 ICC 的照片转换为 sRGB。导出不保留 EXIF（包括 GPS）。不会改动或上传原图。RAW 应先在 Lightroom 等软件中导出带 sRGB 色彩配置的 JPEG/TIFF。
 
 首次导入时加 `--full-resolution` 可同时生成原始分辨率的高清 WebP。该选项会增加公开仓库体积，默认不启用。已导入的图片会跳过，不会自动补生成高清版。
 
@@ -57,3 +57,7 @@ GitHub 完成 Pages 构建后线上页面更新。不要手动在 gh-pages 分�
 photos.json 每张图片的 thumbnail、preview 和可选 full 都可以填写对象存储/CDN 的 HTTPS 地址。浏览页面自动根据屏幕尺寸选缩略图或展示图，点开大图才读取 full（未填写时使用 preview）。跨域图片服务器应允许公开图片读取；不要把私密原图设为公开。照片达到数百上千张时，可将这些文件迁至对象存储而不改页面架构。
 
 本地静态网站无需服务器、数据库或 API 密钥。页面使用弹窗原生键盘焦点管理，支持 Esc 关闭、左右键翻页、系列筛选和手机布局。
+
+## 翻页加载
+
+照片清单内嵌 32px 微型预览，页面先显示微型预览，再使用解码后的 800px 缩略图，并按排版、屏幕和像素密度选择是否加载 1440px 展示图。预览请求最多并发 2 个；当前页完成后，空闲时间预载前后相邻页。省流量或 2G 连接不预载。最近 5 个跨页复用 DOM，图片加载缓存有数量上限。高清图不参与翻页预载，只有点开大图后才请求。

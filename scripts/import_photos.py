@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Generate web copies and update the gallery without modifying originals."""
 import argparse
+import base64
 import hashlib
 import io
 import json
@@ -46,7 +47,13 @@ def main():
                 else:
                     image = image.convert('RGB')
                 width, height = image.size
-                variants = [('thumb', 800, 82), ('view', 2000, 90)]
+                tiny = image.copy()
+                tiny.thumbnail((32, 32), Image.Resampling.LANCZOS)
+                tiny.info.clear()
+                buffer = io.BytesIO()
+                tiny.save(buffer, format='WEBP', quality=45)
+                placeholder = 'data:image/webp;base64,' + base64.b64encode(buffer.getvalue()).decode()
+                variants = [('thumb', 800, 82), ('screen', 1440, 82)]
                 if args.full_resolution:
                     variants.append(('full', None, 95))
                 for label, size, quality in variants:
@@ -56,7 +63,7 @@ def main():
                     copy.info.clear()
                     copy.save(output / f'{digest}-{label}.webp', quality=quality, method=4 if label == 'full' else 6)
             photos.append({'id': digest, 'title': path.stem, 'alt': path.stem, 'series': args.series, 'date': date, 'width': width, 'height': height,
-                           'thumbnail': f'assets/photos/{digest}-thumb.webp', 'preview': f'assets/photos/{digest}-view.webp'})
+                           'thumbnail': f'assets/photos/{digest}-thumb.webp', 'preview': f'assets/photos/{digest}-screen.webp', 'previewEdge': 1440, 'placeholder': placeholder})
             if args.full_resolution:
                 photos[-1]['full'] = f'assets/photos/{digest}-full.webp'
             known.add(digest)

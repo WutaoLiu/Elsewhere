@@ -1,17 +1,60 @@
-const $ = id => document.getElementById(id), version = 'book-20261102', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = 'fast-20261102', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 $('year').textContent = new Date().getFullYear();
-function setImage(image, photo, full = false) {
+const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
+let runningImages = 0, renderRequest = 0;
+function pumpImages() {
+  imageQueue.sort((a,b) => (a.priority === 'low') - (b.priority === 'low'));
+  while (runningImages < 2 && imageQueue.length) {
+    if (viewer.open && imageQueue[0].priority === 'low') return;
+    const job = imageQueue.shift(); runningImages++;
+    const image = new Image(); image.decoding = 'async'; image.fetchPriority = job.priority;
+    const finish = () => { runningImages--; pumpImages(); };
+    image.onload = async () => {
+      try { if (image.decode) await image.decode(); } catch { /* Loaded image remains usable. */ }
+      job.done = true; job.resolve(image); finish();
+      // Keep the bitmap cache bounded; visible DOM nodes retain their own images.
+      if (imageCache.size > 24) {
+        for (const [key, entry] of imageCache) {
+          if (imageCache.size <= 24) break;
+          if (entry.done) imageCache.delete(key);
+        }
+      }
+    };
+    image.onerror = () => { imageCache.delete(job.url); job.reject(Error('Image unavailable')); finish(); };
+    image.src = job.url;
+  }
+}
+function loadImage(url, priority = 'high') {
+  let job = imageCache.get(url);
+  if (job) { if (priority === 'high') job.priority = priority; pumpImages(); return job.promise; }
+  job = { url, priority, done: false };
+  job.promise = new Promise((resolve,reject) => { job.resolve = resolve; job.reject = reject; });
+  imageCache.set(url,job); imageQueue.push(job); pumpImages(); return job.promise;
+}
+function screenSource(photo, layout = 'solo', index = 0) {
+  const mobile = window.innerWidth <= 700, aspect = photo.width / photo.height;
+  const available = mobile ? window.innerWidth * .88 : Math.max(200,window.innerWidth - (window.innerWidth <= 1050 ? 240 : 205 + window.innerWidth * .1));
+  const fractions = { solo: mobile || window.innerWidth <= 1050 ? 1 : .8, duo: index ? .38 : .57, triptych: index ? .35 : .59, portraits: .4, offset: index ? .32 : .55 };
+  const maxHeight = window.innerHeight * (layout === 'triptych' && index ? .22 : layout === 'solo' ? .57 : .49);
+  const width = Math.min(available * (fractions[layout] || 1),maxHeight * aspect);
+  const edge = Math.max(width,width / aspect) * Math.min(window.devicePixelRatio || 1,2);
+  return edge <= 800 ? photo.thumbnail : photo.preview;
+}
+function setImage(image, photo, full = false, layout = 'solo', index = 0, priority = 'high') {
   image.alt = photo.alt || photo.title; image.width = photo.width; image.height = photo.height;
   image.removeAttribute('srcset');
-  if (!full) {
-    const longest = Math.max(photo.width, photo.height);
-    const w = size => Math.max(1, Math.round(Math.min(size, longest) * photo.width / longest));
-    image.srcset = `${photo.thumbnail} ${w(800)}w, ${photo.preview} ${w(2000)}w`;
-    image.sizes = '(max-width:700px) 88vw, 65vw';
-  }
-  image.src = full ? photo.full || photo.preview : photo.preview;
+  image.dataset.photo = photo.id; image.dataset.full = full ? '1' : '0';
+  if (full) { image.src = photo.full || photo.preview; return Promise.resolve(); }
+  image.src = photo.placeholder || photo.thumbnail;
+  const target = screenSource(photo,layout,index);
+  const display = url => { if (image.dataset.photo === photo.id && image.dataset.full !== '1') image.src = url; };
+  return loadImage(photo.thumbnail,priority).then(() => {
+    display(photo.thumbnail);
+    if (target === photo.thumbnail) return;
+    return loadImage(target,priority).then(() => display(target));
+  }).catch(() => { image.dataset.failed = '1'; });
 }
 function setZoom(value) {
   zoomed = value; $('image-stage').classList.toggle('zoomed', zoomed); $('image-stage').scrollTo(0, 0);
@@ -27,7 +70,7 @@ function showPhoto(index) {
   $('image-status').textContent = 'Loading full resolution…'; $('zoom').disabled = true;
   const image = $('full-image');
   image.onload = null; image.onerror = null;
-  setImage(image, photo); // Show the lightweight preview while the full file loads.
+  setImage(image, photo); // Show a small decoded preview while full resolution loads.
   const full = new Image();
   full.onload = () => {
     if (request !== imageRequest || !viewer.open) return;
@@ -41,11 +84,11 @@ function showPhoto(index) {
   };
   full.src = photo.full || photo.preview;
 }
-function photoFigure(id) {
+function photoFigure(id, layout, index, priority) {
   const photo = photoMap.get(id), figure = document.createElement('figure');
   const button = document.createElement('button'); button.type = 'button'; button.className = 'photo-button';
   button.setAttribute('aria-label', `View photograph ${photo.title} at full resolution`);
-  const image = new Image(); image.decoding = 'async'; setImage(image, photo); button.append(image);
+  const image = new Image(); image.decoding = 'async'; figure.ready = setImage(image, photo, false, layout, index, priority); button.append(image);
   button.onclick = () => {
     opener = button; viewerPhotos = active.pages.flatMap(p => p.photos).map(id => photoMap.get(id));
     viewer.showModal(); document.body.classList.add('viewing'); showPhoto(viewerPhotos.findIndex(p => p.id === id)); $('close').focus();
@@ -53,13 +96,49 @@ function photoFigure(id) {
   const caption = document.createElement('figcaption'); caption.textContent = photo.title;
   figure.append(button, caption); return figure;
 }
+function prepareSpread(page, priority = 'high') {
+  if (spreadCache.has(page)) {
+    const saved = spreadCache.get(page);
+    saved.nodes.filter(n => n.tagName === 'FIGURE').forEach((figure,i) => {
+      const image=figure.children[0].children[0];
+      if (image.dataset.failed) {
+        delete image.dataset.failed;
+        figure.ready=setImage(image,photoMap.get(page.photos[i]),false,page.layout,i,priority);
+      }
+    });
+    saved.ready=Promise.allSettled(saved.nodes.map(n=>n.ready).filter(Boolean));
+    // Promote queued preloads when the visitor turns to this page.
+    if (priority === 'high') page.photos.forEach((id,i) => {
+      const p=photoMap.get(id); loadImage(p.thumbnail,'high').catch(()=>{});
+      const target=screenSource(p,page.layout,i);
+      if (imageCache.has(target)) loadImage(target,'high').catch(()=>{});
+    });
+    return saved;
+  }
+  const nodes = page.photos.map((id,i) => photoFigure(id,page.layout,i,priority));
+  if (page.note) { const note=document.createElement('p');note.className='spread-note';note.textContent=page.note;nodes.push(note); }
+  const result = { nodes, ready: Promise.allSettled(nodes.map(n=>n.ready).filter(Boolean)) };
+  spreadCache.set(page,result);
+  while (spreadCache.size > 5) spreadCache.delete(spreadCache.keys().next().value);
+  return result;
+}
+function preloadNeighbors(request) {
+  if (request !== renderRequest || viewer.open || navigator.connection?.saveData || /(^|-)2g/.test(navigator.connection?.effectiveType || '')) return;
+  for (const delta of [1,-1]) {
+    const page=active.pages[pageIndex+delta];
+    if (page) prepareSpread(page,'low');
+  }
+}
 function render() {
   const page = active.pages[pageIndex];
   $('archive-title').textContent = active.title; document.title = `${active.title} — Passing Light`;
   $('archive-count').textContent = `${active.pages.flatMap(p => p.photos).length} photographs`;
-  const spread = $('spread'); spread.replaceChildren(); spread.className = `spread spread-${page.layout}`;
-  page.photos.forEach(id => spread.append(photoFigure(id)));
-  if (page.note) { const note = document.createElement('p'); note.className = 'spread-note'; note.textContent = page.note; spread.append(note); }
+  const spread = $('spread'), request = ++renderRequest, prepared = prepareSpread(page);
+  spread.className = `spread spread-${page.layout}`; spread.replaceChildren(...prepared.nodes);
+  prepared.ready.then(() => {
+    if ('requestIdleCallback' in window) window.requestIdleCallback(()=>preloadNeighbors(request),{timeout:800});
+    else setTimeout(()=>preloadNeighbors(request),150);
+  });
   $('page-label').textContent = `Page ${String(pageIndex + 1).padStart(2,'0')} / ${String(active.pages.length).padStart(2,'0')}`;
   $('page-prev').disabled = pageIndex === 0; $('page-next').disabled = pageIndex === active.pages.length - 1;
   const oldFocus = document.activeElement?.dataset?.page;
@@ -86,7 +165,7 @@ $('page-prev').onclick = () => turn(-1); $('page-next').onclick = () => turn(1);
 $('previous').onclick = () => showPhoto(viewerIndex - 1); $('next').onclick = () => showPhoto(viewerIndex + 1);
 $('zoom').onclick = () => setZoom(!zoomed); $('full-image').onclick = () => { if (!$('zoom').disabled) setZoom(!zoomed); };
 $('close').onclick = () => viewer.close();
-viewer.addEventListener('close', () => { ++imageRequest; document.body.classList.remove('viewing'); setZoom(false); opener?.focus(); });
+viewer.addEventListener('close', () => { ++imageRequest; document.body.classList.remove('viewing'); setZoom(false); opener?.focus(); pumpImages(); preloadNeighbors(renderRequest); });
 document.addEventListener('keydown', e => {
   if (e.altKey || e.ctrlKey || e.metaKey || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || !['ArrowLeft','ArrowRight'].includes(e.key)) return;
   e.preventDefault(); const delta = e.key === 'ArrowLeft' ? -1 : 1;
