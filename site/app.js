@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id), version = 'stagger12-20261102', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = 'collage-20261103', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
@@ -174,10 +174,24 @@ function renderHome() {
   active=null; pageIndex=0; ++renderRequest;
   document.title='Elsewhere — Wutao Liu';
   $('book-heading').hidden=true; $('pagination').hidden=true;
-  const prepared=prepareSpread(home.page),spread=$('spread');
-  prepared.nodes[0].children[0].onclick=()=>navigate(home.archive,0);
-  prepared.nodes[0].children[0].setAttribute('aria-label','Enter the photographic archive');
-  replaceSpread(prepared.nodes,'spread spread-home');
+  if (!home.nodes) {
+    home.nodes=home.collage.map((id,i)=>{
+      const photo=photoMap.get(id),link=document.createElement('a');
+      const archive=archives.find(a=>a.pages.some(p=>p.photos.includes(id)));
+      link.className=`home-layer home-layer-${i+1}`;link.href=`#${archive?.id || home.archive}/1`;
+      link.setAttribute('aria-label',`Explore ${archive?.title || 'the archive'}`);
+      const image=new Image();image.alt=photo.alt;image.width=photo.width;image.height=photo.height;image.decoding='async';
+      image.src=photo.placeholder || photo.thumbnail;link.append(image);
+      loadImage(photo.thumbnail,'low').then(()=>{image.src=photo.thumbnail;}).catch(()=>{});
+      return link;
+    });
+    const heading=document.createElement('div');heading.className='home-wordmark';
+    const title=document.createElement('a');title.className='home-title';title.href='#in-between/1';title.textContent='Elsewhere';
+    title.setAttribute('aria-label','Elsewhere — enter the photographic archive');
+    const signature=document.createElement('span');signature.className='home-signature';signature.textContent='Wutao Liu';
+    heading.append(title,signature);home.nodes.push(heading);
+  }
+  replaceSpread(home.nodes,'spread spread-home spread-collage');
   for (const link of $('archives').children) link.removeAttribute('aria-current');
 }
 function readRoute() {
@@ -210,7 +224,8 @@ async function loadJSON(path) { const r=await fetch(`${path}?v=${version}`,{cach
 Promise.all([loadJSON('photos.json'),loadJSON('archives.json')]).then(([data,book]) => {
   photoMap=new Map(data.photos.map(p=>[p.id,p])); archives=book.archives;
   if (!archives.length || archives.some(a=>!a.pages.length || a.pages.some(p=>!p.photos.length || p.photos.some(id=>!photoMap.has(id))))) throw Error('Invalid archive');
-  home={archive:book.home?.archive || archives[0].id,page:{layout:'solo',photos:[book.home?.photo || archives[0].pages[0].photos[0]]}};
+  home={archive:book.home?.archive || archives[0].id,page:{layout:'solo',photos:[book.home?.photo || archives[0].pages[0].photos[0]]},collage:book.home?.collage || [book.home?.photo || archives[0].pages[0].photos[0]]};
+  if (home.collage.some(id=>!photoMap.has(id))) throw Error('Invalid cover collage');
   if (!photoMap.has(home.page.photos[0]) || !archives.some(a=>a.id===home.archive)) throw Error('Invalid home cover');
   archives.forEach(a => {
     const link=document.createElement('a');link.className='archive-link';link.dataset.archive=a.id;link.href=`#${a.id}/1`;
