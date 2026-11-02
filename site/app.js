@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id), version = 'archive-preload-20261103', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = 'elsewhere-clean-20261103', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
@@ -176,7 +176,7 @@ function preloadNeighbors(request) {
 function render() {
   const page = active.pages[pageIndex];
   $('book-heading').hidden=false; $('pagination').hidden=false;
-  $('archive-title').textContent = active.title; document.title = `${active.title} — Elsewhere.`;
+  $('archive-title').textContent = active.title; document.title = `${active.title} — Elsewhere`;
   $('archive-count').textContent = `${active.pages.flatMap(p => p.photos).length} photographs`;
   const spread = $('spread'), request = ++renderRequest, prepared = prepareSpread(page);
   replaceSpread(prepared.nodes,`spread spread-${page.layout}`);
@@ -202,7 +202,7 @@ function navigate(id, page) { location.hash = `${id}/${page + 1}`; }
 function renderHome() {
   active=null; pageIndex=0; ++renderRequest;
   loadingArchive=null;++archiveLoadRequest;pinnedImages.clear();$('archive-load').hidden=true;
-  document.title='Elsewhere. — Wutao Liu';
+  document.title='Elsewhere — Wutao Liu';
   $('book-heading').hidden=true; $('pagination').hidden=true;
   if (!home.nodes) {
     home.nodes=home.collage.map((id,i)=>{
@@ -216,8 +216,8 @@ function renderHome() {
       return link;
     });
     const heading=document.createElement('div');heading.className='home-wordmark';
-    const title=document.createElement('a');title.className='home-title';title.href='#in-between/1';title.textContent='Elsewhere.';
-    title.setAttribute('aria-label','Elsewhere. — enter the photographic archive');
+    const title=document.createElement('a');title.className='home-title';title.href='#in-between/1';title.textContent='Elsewhere';
+    title.setAttribute('aria-label','Elsewhere — enter the photographic archive');
     const signature=document.createElement('span');signature.className='home-signature';signature.textContent='Wutao Liu';
     heading.append(title,signature);home.nodes.push(heading);
   }
