@@ -1,142 +1,8 @@
 {
   "archives": [
     {
-      "id": "open-air",
-      "title": "Open air",
-      "pages": [
-        {
-          "layout": "solo",
-          "photos": [
-            "e1bdb895e7608f9c1b34"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "f4285d38d83672c9c062",
-            "64c3d9a2baca0e748d66"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "triptych",
-          "photos": [
-            "d2403599c4ef551acaab",
-            "a6b1de19096af2487758",
-            "88c0b25584b9f7eeab91"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "ff4f030b65a63012c515",
-            "510890d1a3903715e860"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "ef2a781964e397dc3bd4",
-            "433c70a36419d7601b30"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "f9317bd133586d7eb7ea",
-            "60f5068e44d789bfe9dc"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "001131b9bc83741904ac",
-            "41ccca7d2398e5fa8754"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "8a78894d0ad483ac2279",
-            "bf84d454bb1018f455df"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "33a21fc55d1daf3e35ce",
-            "de1a85b7abcea5c02055"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "dd5ef13b94b468e3fa40",
-            "b69af653edf7bbc5d088"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "d1454b4f276bc290f7c2",
-            "33560b77ed041c5b5e24"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "35fdc5a83c00ab74b81b",
-            "1551d27dd6d2598f07fb"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "944a94840bcd74500d76",
-            "c51c601ddda437ff863d"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "a4340eb1f118d1f1e157",
-            "6890c971636dac766736"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "fc92539007663960fece",
-            "878cfcacabe3ffc39441"
-          ],
-          "note": ""
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "a72a5b059c764327ee4d",
-            "b0a2f72cfee49932e48f"
-          ],
-          "note": ""
-        }
-      ]
-    },
-    {
-      "id": "street-notes",
-      "title": "Street notes",
+      "id": "in-between",
+      "title": "In Between",
       "pages": [
         {
           "layout": "solo",
@@ -203,7 +69,7 @@
           "note": ""
         },
         {
-          "layout": "duo",
+          "layout": "offset",
           "photos": [
             "fab03a91442dd4d9bb3b",
             "9d9494ae8f9fa87313b8"
@@ -237,8 +103,141 @@
       ]
     },
     {
+      "id": "wandering",
+      "title": "Wandering",
+      "pages": [
+        {
+          "layout": "solo",
+          "photos": [
+            "e1bdb895e7608f9c1b34"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "f4285d38d83672c9c062",
+            "64c3d9a2baca0e748d66"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "triptych",
+          "photos": [
+            "d2403599c4ef551acaab",
+            "a6b1de19096af2487758",
+            "88c0b25584b9f7eeab91"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "ff4f030b65a63012c515",
+            "510890d1a3903715e860"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "ef2a781964e397dc3bd4",
+            "433c70a36419d7601b30"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "f9317bd133586d7eb7ea",
+            "60f5068e44d789bfe9dc"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "offset",
+          "photos": [
+            "001131b9bc83741904ac",
+            "41ccca7d2398e5fa8754"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "8a78894d0ad483ac2279",
+            "bf84d454bb1018f455df"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "33a21fc55d1daf3e35ce",
+            "de1a85b7abcea5c02055"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "offset",
+          "photos": [
+            "dd5ef13b94b468e3fa40",
+            "b69af653edf7bbc5d088"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "d1454b4f276bc290f7c2",
+            "33560b77ed041c5b5e24"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "35fdc5a83c00ab74b81b",
+            "1551d27dd6d2598f07fb"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "944a94840bcd74500d76",
+            "c51c601ddda437ff863d"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "solo",
+          "photos": [
+            "6890c971636dac766736"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "fc92539007663960fece",
+            "878cfcacabe3ffc39441"
+          ],
+          "note": ""
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "a72a5b059c764327ee4d",
+            "b0a2f72cfee49932e48f"
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
       "id": "after-hours",
-      "title": "After hours",
+      "title": "After Hours",
       "pages": [
         {
           "layout": "portraits",
@@ -292,6 +291,6 @@
   ],
   "home": {
     "photo": "e1bdb895e7608f9c1b34",
-    "archive": "open-air"
+    "archive": "wandering"
   }
 }

@@ -23,3 +23,13 @@
 .bio-page .bio-layout{grid-template-columns:minmax(0,1.4fr) minmax(180px,.6fr);gap:8%;min-height:0;padding:35px 0 48px}.bio-page .portrait{max-width:640px;width:100%}.bio-languages{display:grid;grid-template-columns:1fr 1fr;gap:7%;padding:5px 0 60px}.bio-languages .bio-text{max-width:none;margin:0;font-size:14px;line-height:2}.bio-languages [lang="en"]{font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.9}@media(max-width:700px){.bio-page .bio-layout{grid-template-columns:1fr;gap:26px;padding-top:20px}.bio-page .portrait{max-width:none}.bio-languages{grid-template-columns:1fr;gap:25px}}
 
 .bio-page .bio-layout{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:30px 7%;align-items:center}.bio-page .portrait-secondary{padding-top:90px}.bio-page .portrait-secondary .portrait{max-width:460px}.bio-page .bio-copy{grid-column:1/-1}.bio-page .bio-layout{padding-bottom:20px}@media(max-width:700px){.bio-page .bio-layout{grid-template-columns:1fr;gap:25px}.bio-page .portrait-secondary{padding-top:0;width:85%;justify-self:end}.bio-page .portrait-secondary .portrait{max-width:none}}
+
+/* Tighter, larger multi-image spreads; proportions follow the photographs. */
+.spread-duo,.spread-portraits,.spread-offset{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:18px clamp(16px,2vw,28px);padding-left:0;padding-right:0}
+.spread-duo figure,.spread-portraits figure,.spread-offset figure{flex:var(--photo-ratio,1) 1 0;max-width:calc(70vh * var(--photo-ratio,1));padding-top:0!important;align-self:center!important}
+.spread-duo img,.spread-portraits img,.spread-offset img{max-height:70vh}
+.spread-duo .spread-note,.spread-portraits .spread-note,.spread-offset .spread-note{flex:0 0 100%;margin:0;max-width:none}
+.spread-triptych{grid-template-columns:1.2fr 1fr;gap:14px 24px}
+.spread-triptych figure:first-child img{max-height:68vh}
+.spread-triptych figure:nth-child(n+2) img{max-height:31vh}
+@media(max-width:700px){.spread-duo,.spread-portraits{gap:14px 16px}.spread-duo figure,.spread-portraits figure{max-width:calc(58vh * var(--photo-ratio,1))}.spread-duo img,.spread-portraits img{max-height:58vh}.spread-offset{display:grid;grid-template-columns:1fr;gap:18px}.spread-offset figure{max-width:none;width:100%}.spread-offset img{max-height:62vh}.spread-triptych{gap:10px 14px;grid-template-columns:1.15fr 1fr}.spread-triptych figure:nth-child(n+2) img{max-height:28vh}}
