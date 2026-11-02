@@ -24,9 +24,21 @@ python3 scripts/import_photos.py '/安全备份盘/相册文件夹' --series 'Al
 
 ## GitHub Pages
 
-1. 建立独立仓库，例如 passing-light，默认分支为 main。
-2. 上传本项目；仓库 Settings → Pages → Source 选 GitHub Actions。
-3. 推送 main 后会执行 .github/workflows/pages.yml，Actions 成功页面会显示实际网站 URL。
+本站仓库：https://github.com/weirdovo/passing-light
+
+本站地址：https://weirdovo.github.io/passing-light/
+
+采用分支发布，避免要求 GitHub OAuth 凭据具备 workflow 权限。main 保存全部源码和导入工具；gh-pages 只保存 site/ 的发布内容。仓库 Settings → Pages → Source 为 Deploy from a branch，分支 gh-pages，目录 / (root)。
+
+照片导入或页面修改后，检查并提交改动，然后执行：
+
+```sh
+git add .
+git commit -m 'Update photographs'
+sh scripts/publish.sh
+```
+
+GitHub 完成 Pages 构建后线上页面更新。不要手动在 gh-pages 分支修改网站，否则会与后续 subtree 发布冲突。
 
 页面使用相对路径，兼容 https://用户名.github.io/passing-light/ 这样的项目站点。
 
