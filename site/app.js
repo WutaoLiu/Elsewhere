@@ -1,8 +1,23 @@
-const $ = id => document.getElementById(id), version = 'elsewhere-20261102', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = 'edition28-20261102', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
 let runningImages = 0, renderRequest = 0;
+let spreadAnimation = null, spreadChange = 0;
+function replaceSpread(nodes, className) {
+  const spread=$('spread'), change=++spreadChange;
+  const commit=()=>{spread.className=className;spread.replaceChildren(...nodes);};
+  if (spreadAnimation) { spreadAnimation.cancel(); spreadAnimation=null; }
+  const reduced=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (!spread.children.length || reduced || !spread.animate) { commit();return; }
+  spreadAnimation=spread.animate([{opacity:1},{opacity:0}],{duration:110,easing:'ease-out',fill:'forwards'});
+  spreadAnimation.finished.then(()=>{
+    if (change!==spreadChange) return;
+    spreadAnimation.cancel();commit();
+    spreadAnimation=spread.animate([{opacity:0},{opacity:1}],{duration:220,easing:'ease-out'});
+    spreadAnimation.finished.then(()=>{if(change===spreadChange) spreadAnimation=null;}).catch(()=>{});
+  }).catch(()=>{});
+}
 function pumpImages() {
   imageQueue.sort((a,b) => (a.priority === 'low') - (b.priority === 'low'));
   while (runningImages < 2 && imageQueue.length) {
@@ -135,7 +150,7 @@ function render() {
   $('archive-title').textContent = active.title; document.title = `${active.title} — Elsewhere`;
   $('archive-count').textContent = `${active.pages.flatMap(p => p.photos).length} photographs`;
   const spread = $('spread'), request = ++renderRequest, prepared = prepareSpread(page);
-  spread.className = `spread spread-${page.layout}`; spread.replaceChildren(...prepared.nodes);
+  replaceSpread(prepared.nodes,`spread spread-${page.layout}`);
   prepared.ready.then(() => {
     if ('requestIdleCallback' in window) window.requestIdleCallback(()=>preloadNeighbors(request),{timeout:800});
     else setTimeout(()=>preloadNeighbors(request),150);
@@ -161,7 +176,7 @@ function renderHome() {
   const prepared=prepareSpread(home.page),spread=$('spread');
   prepared.nodes[0].children[0].onclick=()=>navigate(home.archive,0);
   prepared.nodes[0].children[0].setAttribute('aria-label','Enter the photographic archive');
-  spread.className='spread spread-home';spread.replaceChildren(...prepared.nodes);
+  replaceSpread(prepared.nodes,'spread spread-home');
   for (const link of $('archives').children) link.removeAttribute('aria-current');
 }
 function readRoute() {
