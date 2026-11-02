@@ -6,9 +6,9 @@
 
 在项目目录运行 `python3 -m http.server 8080 --directory site`，访问 http://localhost:8080 。不要直接用 file:// 打开，照片清单通过 fetch 读取。
 
-当前展示从桌面 selected 中选出的 16 张真实作品，以及 bio 中的一张肖像。首批选择记录在 selection.json；当前的 Archive、页面顺序、版式和短句以 site/archives.json 为准。原名与数字编号的对照表仅保存在桌面的 selected-renaming-map.json，不上传到公开仓库。
+当前展示从桌面 selected 中选出的 67 张真实作品，以及 bio 中的两张个人照片。首批选择记录在 selection.json；当前的 Archive、页面顺序、版式和短句以 site/archives.json 为准。原名与数字编号的对照表仅保存在桌面的 selected-renaming-map.json，不上传到公开仓库。
 
-照片保存在 GitHub 仓库并经 GitHub Pages 提供访问。每张有 800px 缩略图、1440px 展示图，以及原始分辨率的 quality=95 WebP 高清副本；高清副本合计约 121MiB，只有点开大图后加载。它保留原始像素尺寸，但不是字节一致的 JPEG 原件，编码有损。不保留 EXIF、GPS 或 XMP。无水印、无下载按钮，但所有公开展示图片仍可被保存，不能依靠隐藏下载入口保护图片。
+照片保存在 GitHub 仓库并经 GitHub Pages 提供访问。每张有 800px 缩略图、1440px 展示图，以及原始分辨率的 quality=95 WebP 高清副本；高清副本合计约 522MiB，只有点开大图后加载。它保留原始像素尺寸，但不是字节一致的 JPEG 原件，编码有损。不保留 EXIF、GPS 或 XMP。无水印、无下载按钮，但所有公开展示图片仍可被保存，不能依靠隐藏下载入口保护图片。
 
 ## 摄影书排版
 
@@ -65,3 +65,5 @@ photos.json 每张图片的 thumbnail、preview 和可选 full 都可以填写�
 ## 首页
 
 根路径不带 hash 时显示单张封面，点击封面进入指定系列。site/archives.json 的 home.photo 和 home.archive 控制封面图片 id 与入口系列；不需要修改页面代码。左侧站名返回首页。当前为纯白底，已移除说明性文案、编号、装饰分隔线和默认短句。
+
+当前已发布 selected 全部 67 张作品、34 页，以及 Bio 两张个人照片。Bio 介绍桌面端左英右中，手机端英文在上、中文在下。
