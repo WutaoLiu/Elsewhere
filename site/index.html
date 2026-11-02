@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Passing Light — photographs by Wutao Liu.">
+  <meta name="theme-color" content="#f4f2ed">
+  <title>Passing Light — Wutao Liu</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./">Passing Light<span>Photographs by Wutao Liu</span></a>
+    <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a></nav>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="intro-title">
+      <p class="eyebrow">A personal photographic journal</p>
+      <h1 id="intro-title">What the light<br>leaves behind.</h1>
+      <div class="intro-bottom"><p>Places, moments, and the space between.</p><a href="#work">Explore photographs <span aria-hidden="true">↘</span></a></div>
+    </section>
+    <section id="work" aria-labelledby="work-title">
+      <div class="section-heading"><h2 id="work-title">Selected photographs</h2><span id="count"></span></div>
+      <p id="demo-note" class="demo-note" hidden>Layout preview · abstract placeholders, awaiting original photographs.</p>
+      <div id="filters" class="filters" role="group" aria-label="Filter by series"></div>
+      <div id="gallery" class="gallery" aria-live="polite"></div>
+      <p id="status" role="status"></p>
+      <noscript><p>Please enable JavaScript to browse the photographs.</p></noscript>
+    </section>
+    <section id="about" class="about" aria-labelledby="about-title"><h2 id="about-title">A place to pause.</h2><div><p>A collection of photographs by Wutao Liu.</p><p class="muted">Passing Light is a working title for this independent photographic archive.</p><a href="#work">Back to photographs ↑</a></div></section>
+  </main>
+  <footer><span>© <span id="year"></span> Wutao Liu</span><span>Passing Light</span></footer>
+  <dialog id="viewer" aria-label="Photograph viewer">
+    <div class="viewer-bar"><span id="position"></span><button id="close" aria-label="Close photograph">Close ×</button></div>
+    <div class="viewer-image"><button id="previous" aria-label="Previous photograph">←</button><img id="full-image" alt=""><button id="next" aria-label="Next photograph">→</button></div>
+    <div class="viewer-caption"><span id="caption"></span><span id="series"></span></div>
+  </dialog>
+</body>
+</html>
