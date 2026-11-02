@@ -34,9 +34,9 @@ python3 scripts/import_photos.py '/安全备份盘/相册文件夹' --series 'Al
 
 ## GitHub Pages
 
-本站仓库：https://github.com/weirdovo/passing-light
+本站仓库：https://github.com/weirdovo/Elsewhere
 
-本站地址：https://weirdovo.github.io/passing-light/
+本站地址：https://weirdovo.github.io/Elsewhere/
 
 采用分支发布，避免要求 GitHub OAuth 凭据具备 workflow 权限。main 保存全部源码和导入工具；gh-pages 只保存 site/ 的发布内容。仓库 Settings → Pages → Source 为 Deploy from a branch，分支 gh-pages，目录 / (root)。
 
@@ -50,7 +50,7 @@ sh scripts/publish.sh
 
 GitHub 完成 Pages 构建后线上页面更新。不要手动在 gh-pages 分支修改网站，否则会与后续 subtree 发布冲突。
 
-页面使用相对路径，兼容 https://用户名.github.io/passing-light/ 这样的项目站点。
+页面使用相对路径，兼容 https://用户名.github.io/Elsewhere/ 这样的项目站点。
 
 ## 外部图片存储
 
@@ -69,3 +69,7 @@ photos.json 每张图片的 thumbnail、preview 和可选 full 都可以填写�
 当前已发布 selected 全部 67 张作品、34 页，以及 Bio 两张个人照片。Bio 介绍桌面端左英右中，手机端英文在上、中文在下。
 
 进入 Archive 后立即预加载该系列全部缩略图和屏幕预览，显示 Loading 进度；Loaded 表示整组预览已下载。当前系列图片在缓存中保留，其他图片缓存仍有上限。只在实际展示时主动解码，避免同时解码整个系列占用过多内存。高清文件仍仅在点开大图时请求。
+
+## 正式版
+
+固定项目名与仓库名：Elsewhere。首个正式版本：v1.0.0（Elsewhere v1.0.0）。线上固定入口：https://weirdovo.github.io/Elsewhere/ 。首页链接不再使用临时预览版本参数；CSS、JS 和数据资源保留发布版本号以控制缓存。
