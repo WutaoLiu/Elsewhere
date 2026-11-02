@@ -1,7 +1,8 @@
-const $ = id => document.getElementById(id), version = 'elsewhere-dot-20261103', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = 'archive-preload-20261103', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
+let pinnedImages = new Set(), archiveLoadRequest = 0, loadingArchive = null;
 let runningImages = 0, renderRequest = 0;
 let spreadAnimation = null, spreadChange = 0;
 function replaceSpread(nodes, className) {
@@ -19,20 +20,20 @@ function replaceSpread(nodes, className) {
   }).catch(()=>{});
 }
 function pumpImages() {
-  imageQueue.sort((a,b) => (a.priority === 'low') - (b.priority === 'low'));
-  while (runningImages < 2 && imageQueue.length) {
-    if (viewer.open && imageQueue[0].priority === 'low') return;
+  imageQueue.sort((a,b) => (a.priority === 'low') - (b.priority === 'low') || Number(pinnedImages.has(b.url))-Number(pinnedImages.has(a.url)));
+  const limit=/2g/.test(navigator.connection?.effectiveType || '') ? 2 : 4;
+  while (runningImages < limit && imageQueue.length) {
+    if (viewer.open && imageQueue[0].priority === 'low' && !pinnedImages.has(imageQueue[0].url)) return;
     const job = imageQueue.shift(); runningImages++;
     const image = new Image(); image.decoding = 'async'; image.fetchPriority = job.priority;
     const finish = () => { runningImages--; pumpImages(); };
     image.onload = async () => {
-      try { if (image.decode) await image.decode(); } catch { /* Loaded image remains usable. */ }
       job.done = true; job.resolve(image); finish();
       // Keep the bitmap cache bounded; visible DOM nodes retain their own images.
-      if (imageCache.size > 24) {
+      if (imageCache.size > pinnedImages.size + 24) {
         for (const [key, entry] of imageCache) {
-          if (imageCache.size <= 24) break;
-          if (entry.done) imageCache.delete(key);
+          if (imageCache.size <= pinnedImages.size + 24) break;
+          if (entry.done && !pinnedImages.has(key)) imageCache.delete(key);
         }
       }
     };
@@ -40,12 +41,39 @@ function pumpImages() {
     image.src = job.url;
   }
 }
-function loadImage(url, priority = 'high') {
+function loadImage(url, priority = 'high', decode = true) {
+  const ready = job => !decode ? job.promise : job.promise.then(image=>{
+    if (!job.decoded) job.decoded=image.decode ? image.decode().catch(()=>{}) : Promise.resolve();
+    return job.decoded.then(()=>image);
+  });
   let job = imageCache.get(url);
-  if (job) { if (priority === 'high') job.priority = priority; pumpImages(); return job.promise; }
+  if (job) { if (priority === 'high') job.priority = priority; pumpImages(); return ready(job); }
   job = { url, priority, done: false };
   job.promise = new Promise((resolve,reject) => { job.resolve = resolve; job.reject = reject; });
-  imageCache.set(url,job); imageQueue.push(job); pumpImages(); return job.promise;
+  imageCache.set(url,job); imageQueue.push(job); pumpImages(); return ready(job);
+}
+function preloadArchive() {
+  if (!active || loadingArchive===active.id) return;
+  loadingArchive=active.id;
+  const request=++archiveLoadRequest, archive=active;
+  const photos=[...new Set(archive.pages.flatMap(p=>p.photos))].map(id=>photoMap.get(id));
+  pinnedImages=new Set(photos.flatMap(p=>[p.thumbnail,p.preview]));
+  let completed=0,failed=0;
+  const status=$('archive-load');status.hidden=false;
+  const update=()=>{
+    if (request!==archiveLoadRequest) return;
+    status.textContent=completed===photos.length ? failed ? `${failed} images unavailable` : 'Loaded' : `Loading ${completed} / ${photos.length}`;
+  };
+  update();
+  for (const photo of photos) {
+    Promise.all([loadImage(photo.thumbnail,'low',false),loadImage(photo.preview,'low',false)])
+      .catch(()=>{failed++;}).finally(()=>{
+        completed++;update();
+        if (completed===photos.length && !failed) setTimeout(()=>{
+          if (request===archiveLoadRequest) status.hidden=true;
+        },2500);
+      });
+  }
 }
 function screenSource(photo, layout = 'solo', index = 0) {
   const mobile = window.innerWidth <= 700, aspect = photo.width / photo.height;
@@ -148,10 +176,11 @@ function preloadNeighbors(request) {
 function render() {
   const page = active.pages[pageIndex];
   $('book-heading').hidden=false; $('pagination').hidden=false;
-  $('archive-title').textContent = active.title; document.title = `${active.title} — Elsewhere`;
+  $('archive-title').textContent = active.title; document.title = `${active.title} — Elsewhere.`;
   $('archive-count').textContent = `${active.pages.flatMap(p => p.photos).length} photographs`;
   const spread = $('spread'), request = ++renderRequest, prepared = prepareSpread(page);
   replaceSpread(prepared.nodes,`spread spread-${page.layout}`);
+  preloadArchive();
   prepared.ready.then(() => {
     if ('requestIdleCallback' in window) window.requestIdleCallback(()=>preloadNeighbors(request),{timeout:800});
     else setTimeout(()=>preloadNeighbors(request),150);
@@ -172,6 +201,7 @@ function render() {
 function navigate(id, page) { location.hash = `${id}/${page + 1}`; }
 function renderHome() {
   active=null; pageIndex=0; ++renderRequest;
+  loadingArchive=null;++archiveLoadRequest;pinnedImages.clear();$('archive-load').hidden=true;
   document.title='Elsewhere. — Wutao Liu';
   $('book-heading').hidden=true; $('pagination').hidden=true;
   if (!home.nodes) {
@@ -182,7 +212,7 @@ function renderHome() {
       link.setAttribute('aria-label',`Explore ${archive?.title || 'the archive'}`);
       const image=new Image();image.alt=photo.alt;image.width=photo.width;image.height=photo.height;image.decoding='async';
       image.src=photo.placeholder || photo.thumbnail;link.append(image);
-      loadImage(photo.thumbnail,'low').then(()=>{image.src=photo.thumbnail;}).catch(()=>{});
+      loadImage(photo.thumbnail,'high').then(()=>{image.src=photo.thumbnail;}).catch(()=>{});
       return link;
     });
     const heading=document.createElement('div');heading.className='home-wordmark';
