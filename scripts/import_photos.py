@@ -14,6 +14,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('source', type=Path)
     parser.add_argument('--series', required=True)
+    parser.add_argument('--full-resolution', action='store_true', help='Also export an original-resolution quality=95 WebP')
     args = parser.parse_args()
     if not args.source.is_dir():
         parser.error('source must be a readable directory')
@@ -45,13 +46,19 @@ def main():
                 else:
                     image = image.convert('RGB')
                 width, height = image.size
-                for label, size, quality in [('thumb', 800, 82), ('view', 2000, 90)]:
+                variants = [('thumb', 800, 82), ('view', 2000, 90)]
+                if args.full_resolution:
+                    variants.append(('full', None, 95))
+                for label, size, quality in variants:
                     copy = image.copy()
-                    copy.thumbnail((size, size), Image.Resampling.LANCZOS)
+                    if size:
+                        copy.thumbnail((size, size), Image.Resampling.LANCZOS)
                     copy.info.clear()
-                    copy.save(output / f'{digest}-{label}.webp', quality=quality, method=6)
+                    copy.save(output / f'{digest}-{label}.webp', quality=quality, method=4 if label == 'full' else 6)
             photos.append({'id': digest, 'title': path.stem, 'alt': path.stem, 'series': args.series, 'date': date, 'width': width, 'height': height,
                            'thumbnail': f'assets/photos/{digest}-thumb.webp', 'preview': f'assets/photos/{digest}-view.webp'})
+            if args.full_resolution:
+                photos[-1]['full'] = f'assets/photos/{digest}-full.webp'
             known.add(digest)
             count += 1
         except Exception as error:
