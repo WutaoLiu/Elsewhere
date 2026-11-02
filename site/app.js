@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id), version = 'white-20261102', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = 'elsewhere-20261102', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
@@ -132,7 +132,7 @@ function preloadNeighbors(request) {
 function render() {
   const page = active.pages[pageIndex];
   $('book-heading').hidden=false; $('pagination').hidden=false;
-  $('archive-title').textContent = active.title; document.title = `${active.title} — Passing Light`;
+  $('archive-title').textContent = active.title; document.title = `${active.title} — Elsewhere`;
   $('archive-count').textContent = `${active.pages.flatMap(p => p.photos).length} photographs`;
   const spread = $('spread'), request = ++renderRequest, prepared = prepareSpread(page);
   spread.className = `spread spread-${page.layout}`; spread.replaceChildren(...prepared.nodes);
@@ -156,7 +156,7 @@ function render() {
 function navigate(id, page) { location.hash = `${id}/${page + 1}`; }
 function renderHome() {
   active=null; pageIndex=0; ++renderRequest;
-  document.title='Passing Light — Wutao Liu';
+  document.title='Elsewhere — Wutao Liu';
   $('book-heading').hidden=true; $('pagination').hidden=true;
   const prepared=prepareSpread(home.page),spread=$('spread');
   prepared.nodes[0].children[0].onclick=()=>navigate(home.archive,0);

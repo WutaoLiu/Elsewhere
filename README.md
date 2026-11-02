@@ -1,6 +1,6 @@
-# Passing Light
+# Elsewhere
 
-独立摄影作品站，纯 HTML / CSS / JavaScript，部署到 GitHub Pages。暂用 Passing Light 作为标题。
+独立摄影作品站，纯 HTML / CSS / JavaScript，部署到 GitHub Pages。暂用 Elsewhere 作为标题。
 
 ## 预览
 
