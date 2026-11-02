@@ -19,3 +19,7 @@
 @media(prefers-reduced-motion:reduce){.archive-link,.bio-link,.archive-link span::after,.bio-link::after{transition:none}.archive-link:hover,.archive-link:focus-visible,.bio-link:hover,.bio-link:focus-visible{transform:none}}
 
 .bio-text{max-width:390px;margin:28px 0 25px;font-size:13px;line-height:2;color:#666}.bio-text p{margin:0 0 18px}.bio-copy>p{font-size:11px;margin-top:24px;color:#777}
+
+.bio-page .bio-layout{grid-template-columns:minmax(0,1.4fr) minmax(180px,.6fr);gap:8%;min-height:0;padding:35px 0 48px}.bio-page .portrait{max-width:640px;width:100%}.bio-languages{display:grid;grid-template-columns:1fr 1fr;gap:7%;padding:5px 0 60px}.bio-languages .bio-text{max-width:none;margin:0;font-size:14px;line-height:2}.bio-languages [lang="en"]{font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.9}@media(max-width:700px){.bio-page .bio-layout{grid-template-columns:1fr;gap:26px;padding-top:20px}.bio-page .portrait{max-width:none}.bio-languages{grid-template-columns:1fr;gap:25px}}
+
+.bio-page .bio-layout{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:30px 7%;align-items:center}.bio-page .portrait-secondary{padding-top:90px}.bio-page .portrait-secondary .portrait{max-width:460px}.bio-page .bio-copy{grid-column:1/-1}.bio-page .bio-layout{padding-bottom:20px}@media(max-width:700px){.bio-page .bio-layout{grid-template-columns:1fr;gap:25px}.bio-page .portrait-secondary{padding-top:0;width:85%;justify-self:end}.bio-page .portrait-secondary .portrait{max-width:none}}
