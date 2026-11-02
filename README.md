@@ -12,7 +12,7 @@
 
 ## 摄影书排版
 
-site/archives.json 定义左侧 Archive 及右侧每一页。每页的 photos 填写 photos.json 的图片 id，layout 可选 solo（1 张）、duo（2 张）、triptych（3 张）、portraits（2 张）或 offset（2 张）；note 可填写多行短句，也可以留空。当前短句为可替换的编辑草稿，不代表作者原话。所有照片保持原画幅，不进行强制裁切。
+site/archives.json 定义左侧 Archive 及右侧每一页。每页的 photos 填写 photos.json 的图片 id，layout 可选 solo（1 张）、duo（2 张）、triptych（3 张）、portraits（2 张）或 offset（2 张）；note 可填写多行短句，也可以留空。当前所有短句留空，之后可补充作者自己的文字。所有照片保持原画幅，不进行强制裁切。
 
 桌面左右箭头、分页圆点和键盘 ← → 可翻页；手机支持滑动。点图进入大图，再点击图片或 100% 按钮可按图像像素尺寸查看并滚动。Esc 关闭。Bio 独立位于 bio.html。
 
@@ -61,3 +61,7 @@ photos.json 每张图片的 thumbnail、preview 和可选 full 都可以填写�
 ## 翻页加载
 
 照片清单内嵌 32px 微型预览，页面先显示微型预览，再使用解码后的 800px 缩略图，并按排版、屏幕和像素密度选择是否加载 1440px 展示图。预览请求最多并发 2 个；当前页完成后，空闲时间预载前后相邻页。省流量或 2G 连接不预载。最近 5 个跨页复用 DOM，图片加载缓存有数量上限。高清图不参与翻页预载，只有点开大图后才请求。
+
+## 首页
+
+根路径不带 hash 时显示单张封面，点击封面进入指定系列。site/archives.json 的 home.photo 和 home.archive 控制封面图片 id 与入口系列；不需要修改页面代码。左侧站名返回首页。当前为纯白底，已移除说明性文案、编号、装饰分隔线和默认短句。
