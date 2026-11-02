@@ -7,7 +7,10 @@ function setImage(image, photo, full = false) {
   image.src = full ? (photo.full || photo.preview) : (photo.thumbnail || photo.preview);
   image.removeAttribute('srcset');
   if (!full && photo.thumbnail && photo.preview && photo.thumbnail !== photo.preview) {
-    image.srcset = `${photo.thumbnail} 800w, ${photo.preview} 2000w`;
+    const ratio = photo.width / Math.max(photo.width, photo.height);
+    const thumbWidth = Math.max(1, Math.round(Math.min(800, Math.max(photo.width, photo.height)) * ratio));
+    const viewWidth = Math.max(1, Math.round(Math.min(2000, Math.max(photo.width, photo.height)) * ratio));
+    image.srcset = `${photo.thumbnail} ${thumbWidth}w, ${photo.preview} ${viewWidth}w`;
     image.sizes = '(max-width: 650px) 88vw, 42vw';
   }
   if (photo.width && photo.height) { image.width = photo.width; image.height = photo.height; }

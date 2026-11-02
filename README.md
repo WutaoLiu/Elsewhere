@@ -6,7 +6,7 @@
 
 在项目目录运行 `python3 -m http.server 8080 --directory site`，访问 http://localhost:8080 。不要直接用 file:// 打开，照片清单通过 fetch 读取。
 
-当前图片均为自制抽象布局占位图，不是刘武韬的摄影作品。导入真实照片后清单中的 demo 会自动关闭。
+当前展示从桌面 selected 中选出的 16 张真实作品，以及 bio 中的一张肖像。首批选择及展示顺序记录在 selection.json。网站只包含 WebP 展示副本，不包含全尺寸原图。原名与数字编号的对照表仅保存在桌面的 selected-renaming-map.json，不上传到公开仓库。
 
 ## 导入照片
 
