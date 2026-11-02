@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id), version = '1.0.1', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = '1.0.2', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
@@ -179,7 +179,7 @@ function render() {
   $('archive-title').textContent = active.title; document.title = `${active.title} — Elsewhere`;
   $('archive-count').textContent = `${active.pages.flatMap(p => p.photos).length} photographs`;
   const spread = $('spread'), request = ++renderRequest, prepared = prepareSpread(page);
-  replaceSpread(prepared.nodes,`spread spread-${page.layout}`);
+  replaceSpread(prepared.nodes,`spread spread-${page.layout} composition-${page.composition || "left-high"}`);
   preloadArchive();
   prepared.ready.then(() => {
     if ('requestIdleCallback' in window) window.requestIdleCallback(()=>preloadNeighbors(request),{timeout:800});

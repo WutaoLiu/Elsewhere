@@ -9,7 +9,8 @@
           "photos": [
             "b62d456e0fdb0ccbd38f"
           ],
-          "note": ""
+          "note": "",
+          "composition": "solo"
         },
         {
           "layout": "duo",
@@ -17,7 +18,8 @@
             "11d7d0676635dfb6b1b5",
             "d8aea6029973241fee5c"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -25,7 +27,8 @@
             "51748e59f283857a18c1",
             "66168038ada6ad5c002e"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -33,7 +36,8 @@
             "9c733cf073bbf7cd3129",
             "556b292d61455d8b179e"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "triptych",
@@ -42,7 +46,8 @@
             "2c978b670f5b07077c93",
             "e5118ef6e214d86eecf3"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-heavy"
         },
         {
           "layout": "duo",
@@ -50,7 +55,8 @@
             "c67c9e95f61a043b09c5",
             "0b87fa7bfc8677d8c749"
           ],
-          "note": ""
+          "note": "",
+          "composition": "level"
         },
         {
           "layout": "duo",
@@ -58,7 +64,8 @@
             "5e278d534333b57a504b",
             "24231b75a1ab5ac1d19a"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -66,7 +73,8 @@
             "70b017880ebfa920cad7",
             "20e2080777ae641ea020"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "offset",
@@ -74,7 +82,8 @@
             "fab03a91442dd4d9bb3b",
             "9d9494ae8f9fa87313b8"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -82,7 +91,8 @@
             "60ae0dad65cbe64cfc02",
             "b246ad8f99c941f8961d"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -90,7 +100,8 @@
             "40dd032156e42099bed8",
             "397c3d1cfebddb5123c0"
           ],
-          "note": ""
+          "note": "",
+          "composition": "level"
         },
         {
           "layout": "duo",
@@ -98,7 +109,8 @@
             "fc9b3390b382ad0f70d2",
             "7dd11b2dfa05331a66cd"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         }
       ]
     },
@@ -111,7 +123,8 @@
           "photos": [
             "e1bdb895e7608f9c1b34"
           ],
-          "note": ""
+          "note": "",
+          "composition": "solo"
         },
         {
           "layout": "duo",
@@ -119,7 +132,8 @@
             "f4285d38d83672c9c062",
             "64c3d9a2baca0e748d66"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "triptych",
@@ -128,7 +142,8 @@
             "a6b1de19096af2487758",
             "88c0b25584b9f7eeab91"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-heavy"
         },
         {
           "layout": "duo",
@@ -136,7 +151,8 @@
             "ff4f030b65a63012c515",
             "510890d1a3903715e860"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -144,7 +160,8 @@
             "ef2a781964e397dc3bd4",
             "433c70a36419d7601b30"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -152,7 +169,8 @@
             "f9317bd133586d7eb7ea",
             "60f5068e44d789bfe9dc"
           ],
-          "note": ""
+          "note": "",
+          "composition": "level"
         },
         {
           "layout": "offset",
@@ -160,7 +178,8 @@
             "001131b9bc83741904ac",
             "41ccca7d2398e5fa8754"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -168,7 +187,8 @@
             "8a78894d0ad483ac2279",
             "bf84d454bb1018f455df"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -176,7 +196,8 @@
             "33a21fc55d1daf3e35ce",
             "de1a85b7abcea5c02055"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         },
         {
           "layout": "offset",
@@ -184,7 +205,8 @@
             "dd5ef13b94b468e3fa40",
             "b69af653edf7bbc5d088"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -192,7 +214,8 @@
             "d1454b4f276bc290f7c2",
             "33560b77ed041c5b5e24"
           ],
-          "note": ""
+          "note": "",
+          "composition": "level"
         },
         {
           "layout": "duo",
@@ -200,7 +223,8 @@
             "35fdc5a83c00ab74b81b",
             "1551d27dd6d2598f07fb"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -208,14 +232,16 @@
             "944a94840bcd74500d76",
             "c51c601ddda437ff863d"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "solo",
           "photos": [
             "6890c971636dac766736"
           ],
-          "note": ""
+          "note": "",
+          "composition": "solo"
         },
         {
           "layout": "duo",
@@ -223,7 +249,8 @@
             "fc92539007663960fece",
             "878cfcacabe3ffc39441"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -231,7 +258,8 @@
             "a72a5b059c764327ee4d",
             "b0a2f72cfee49932e48f"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         }
       ]
     },
@@ -245,7 +273,8 @@
             "87ffe682cb247327078a",
             "0da52a1c96189e2d07a8"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "offset",
@@ -253,7 +282,8 @@
             "e415f92360a582cdede2",
             "f675df303d4f4cc518a4"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -261,7 +291,8 @@
             "0858ce839e56c8e21457",
             "2801d1bff8eba39bde02"
           ],
-          "note": ""
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "offset",
@@ -269,7 +300,8 @@
             "61e7ae1957cca4985517",
             "3d02548450f119a307bf"
           ],
-          "note": ""
+          "note": "",
+          "composition": "level"
         },
         {
           "layout": "duo",
@@ -277,14 +309,16 @@
             "8f884e2a2f90fb12730a",
             "afa2aeebccbd8a1766da"
           ],
-          "note": ""
+          "note": "",
+          "composition": "right-high"
         },
         {
           "layout": "solo",
           "photos": [
             "09ad243f90e59d1bb91e"
           ],
-          "note": ""
+          "note": "",
+          "composition": "solo"
         }
       ]
     }
