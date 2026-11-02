@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id), version = 'all67-20261102', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = 'themes66-20261102', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
@@ -50,8 +50,8 @@ function loadImage(url, priority = 'high') {
 function screenSource(photo, layout = 'solo', index = 0) {
   const mobile = window.innerWidth <= 700, aspect = photo.width / photo.height;
   const available = mobile ? window.innerWidth * .88 : Math.max(200,window.innerWidth - (window.innerWidth <= 1050 ? 240 : 205 + window.innerWidth * .1));
-  const fractions = { solo: mobile || window.innerWidth <= 1050 ? 1 : .8, duo: index ? .38 : .57, triptych: index ? .35 : .59, portraits: .4, offset: index ? .32 : .55 };
-  const maxHeight = window.innerHeight * (layout === 'triptych' && index ? .22 : layout === 'solo' ? .57 : .49);
+  const fractions = { solo: mobile || window.innerWidth <= 1050 ? 1 : .8, duo: .5, triptych: index ? .43 : .52, portraits: .5, offset: .65 };
+  const maxHeight = window.innerHeight * (layout === 'triptych' && index ? .31 : layout === 'solo' ? .65 : .70);
   const width = Math.min(available * (fractions[layout] || 1),maxHeight * aspect);
   const edge = Math.max(width,width / aspect) * Math.min(window.devicePixelRatio || 1,2);
   return edge <= 800 ? photo.thumbnail : photo.preview;
@@ -101,6 +101,7 @@ function showPhoto(index) {
 }
 function photoFigure(id, layout, index, priority) {
   const photo = photoMap.get(id), figure = document.createElement('figure');
+  figure.setAttribute('style',`--photo-ratio:${photo.width/photo.height}`);
   const button = document.createElement('button'); button.type = 'button'; button.className = 'photo-button';
   button.setAttribute('aria-label', `View photograph ${photo.title} at full resolution`);
   const image = new Image(); image.decoding = 'async'; figure.ready = setImage(image, photo, false, layout, index, priority); button.append(image);
@@ -181,7 +182,7 @@ function renderHome() {
 }
 function readRoute() {
   if (!location.hash || location.hash==='#home') { renderHome();return; }
-  const [id, raw] = location.hash.slice(1).split('/'); active = archives.find(a => a.id === id) || archives[0];
+  const [rawId, raw] = location.hash.slice(1).split('/'); const id = ({'open-air':'wandering','street-notes':'in-between'})[rawId] || rawId; active = archives.find(a => a.id === id) || archives[0];
   const n = Number(raw); pageIndex = Number.isInteger(n) ? Math.max(0,Math.min(active.pages.length - 1,n - 1)) : 0; render();
 }
 function turn(delta) {
