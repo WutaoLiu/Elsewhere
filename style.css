@@ -17,3 +17,5 @@
 .bio-link:hover::after,.bio-link:focus-visible::after,.bio-link[aria-current=page]::after{transform:scaleX(1)}
 @media(max-width:700px){.brand{font-size:23px}.archive-link,.bio-link{font-size:16px}.archive-link{padding:5px 0}.bio-link{align-self:start}.brand span{margin-top:8px}}
 @media(prefers-reduced-motion:reduce){.archive-link,.bio-link,.archive-link span::after,.bio-link::after{transition:none}.archive-link:hover,.archive-link:focus-visible,.bio-link:hover,.bio-link:focus-visible{transform:none}}
+
+.bio-text{max-width:390px;margin:28px 0 25px;font-size:13px;line-height:2;color:#666}.bio-text p{margin:0 0 18px}.bio-copy>p{font-size:11px;margin-top:24px;color:#777}
