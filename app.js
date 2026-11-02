@@ -1,7 +1,6 @@
-const $ = id => document.getElementById(id), version = 'fast-20261102', viewer = $('viewer');
-let archives = [], photoMap = new Map(), active = null, pageIndex = 0;
+const $ = id => document.getElementById(id), version = 'white-20261102', viewer = $('viewer');
+let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
-$('year').textContent = new Date().getFullYear();
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
 let runningImages = 0, renderRequest = 0;
 function pumpImages() {
@@ -67,7 +66,7 @@ function showPhoto(index) {
   setZoom(false);
   $('position').textContent = `${viewerIndex + 1} / ${viewerPhotos.length}`;
   $('caption').textContent = `${active.title} / ${photo.title}`;
-  $('image-status').textContent = 'Loading full resolution…'; $('zoom').disabled = true;
+  $('image-status').textContent = 'Loading…'; $('zoom').disabled = true;
   const image = $('full-image');
   image.onload = null; image.onerror = null;
   setImage(image, photo); // Show a small decoded preview while full resolution loads.
@@ -75,7 +74,7 @@ function showPhoto(index) {
   full.onload = () => {
     if (request !== imageRequest || !viewer.open) return;
     setImage(image, photo, true);
-    $('image-status').textContent = `${full.naturalWidth} × ${full.naturalHeight} · Click to zoom`;
+    $('image-status').textContent = `${full.naturalWidth} × ${full.naturalHeight}`;
     $('zoom').disabled = false;
   };
   full.onerror = () => {
@@ -123,7 +122,7 @@ function prepareSpread(page, priority = 'high') {
   return result;
 }
 function preloadNeighbors(request) {
-  if (request !== renderRequest || viewer.open || navigator.connection?.saveData || /(^|-)2g/.test(navigator.connection?.effectiveType || '')) return;
+  if (request !== renderRequest || !active || viewer.open || navigator.connection?.saveData || /(^|-)2g/.test(navigator.connection?.effectiveType || '')) return;
   for (const delta of [1,-1]) {
     const page=active.pages[pageIndex+delta];
     if (page) prepareSpread(page,'low');
@@ -131,6 +130,7 @@ function preloadNeighbors(request) {
 }
 function render() {
   const page = active.pages[pageIndex];
+  $('book-heading').hidden=false; $('pagination').hidden=false;
   $('archive-title').textContent = active.title; document.title = `${active.title} — Passing Light`;
   $('archive-count').textContent = `${active.pages.flatMap(p => p.photos).length} photographs`;
   const spread = $('spread'), request = ++renderRequest, prepared = prepareSpread(page);
@@ -139,7 +139,7 @@ function render() {
     if ('requestIdleCallback' in window) window.requestIdleCallback(()=>preloadNeighbors(request),{timeout:800});
     else setTimeout(()=>preloadNeighbors(request),150);
   });
-  $('page-label').textContent = `Page ${String(pageIndex + 1).padStart(2,'0')} / ${String(active.pages.length).padStart(2,'0')}`;
+  $('page-label').textContent = `${String(pageIndex + 1).padStart(2,'0')} / ${String(active.pages.length).padStart(2,'0')}`;
   $('page-prev').disabled = pageIndex === 0; $('page-next').disabled = pageIndex === active.pages.length - 1;
   const oldFocus = document.activeElement?.dataset?.page;
   $('page-dots').replaceChildren();
@@ -153,7 +153,18 @@ function render() {
   }
 }
 function navigate(id, page) { location.hash = `${id}/${page + 1}`; }
+function renderHome() {
+  active=null; pageIndex=0; ++renderRequest;
+  document.title='Passing Light — Wutao Liu';
+  $('book-heading').hidden=true; $('pagination').hidden=true;
+  const prepared=prepareSpread(home.page),spread=$('spread');
+  prepared.nodes[0].children[0].onclick=()=>navigate(home.archive,0);
+  prepared.nodes[0].children[0].setAttribute('aria-label','Enter the photographic archive');
+  spread.className='spread spread-home';spread.replaceChildren(...prepared.nodes);
+  for (const link of $('archives').children) link.removeAttribute('aria-current');
+}
 function readRoute() {
+  if (!location.hash || location.hash==='#home') { renderHome();return; }
   const [id, raw] = location.hash.slice(1).split('/'); active = archives.find(a => a.id === id) || archives[0];
   const n = Number(raw); pageIndex = Number.isInteger(n) ? Math.max(0,Math.min(active.pages.length - 1,n - 1)) : 0; render();
 }
@@ -182,10 +193,11 @@ async function loadJSON(path) { const r=await fetch(`${path}?v=${version}`,{cach
 Promise.all([loadJSON('photos.json'),loadJSON('archives.json')]).then(([data,book]) => {
   photoMap=new Map(data.photos.map(p=>[p.id,p])); archives=book.archives;
   if (!archives.length || archives.some(a=>!a.pages.length || a.pages.some(p=>!p.photos.length || p.photos.some(id=>!photoMap.has(id))))) throw Error('Invalid archive');
-  archives.forEach((a,i) => {
+  home={archive:book.home?.archive || archives[0].id,page:{layout:'solo',photos:[book.home?.photo || archives[0].pages[0].photos[0]]}};
+  if (!photoMap.has(home.page.photos[0]) || !archives.some(a=>a.id===home.archive)) throw Error('Invalid home cover');
+  archives.forEach(a => {
     const link=document.createElement('a');link.className='archive-link';link.dataset.archive=a.id;link.href=`#${a.id}/1`;
-    const number=document.createElement('span');number.className='archive-number';number.textContent=String(i+1).padStart(2,'0');
-    const title=document.createElement('span');title.textContent=a.title;link.append(number,title);$('archives').append(link);
+    const title=document.createElement('span');title.textContent=a.title;link.append(title);$('archives').append(link);
   });
   $('status').hidden=true;window.addEventListener('hashchange',readRoute);readRoute();
 }).catch(()=>{$('status').textContent='The archive could not be loaded. Please refresh to try again.';});

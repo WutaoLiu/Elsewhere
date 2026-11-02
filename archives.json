@@ -9,7 +9,7 @@
           "photos": [
             "e1bdb895e7608f9c1b34"
           ],
-          "note": "A pause\nbetween places."
+          "note": ""
         },
         {
           "layout": "duo",
@@ -17,7 +17,7 @@
             "f4285d38d83672c9c062",
             "64c3d9a2baca0e748d66"
           ],
-          "note": "Small gestures.\nAn ordinary afternoon."
+          "note": ""
         },
         {
           "layout": "triptych",
@@ -26,7 +26,7 @@
             "a6b1de19096af2487758",
             "88c0b25584b9f7eeab91"
           ],
-          "note": "The river keeps its own time."
+          "note": ""
         }
       ]
     },
@@ -39,7 +39,7 @@
           "photos": [
             "24231b75a1ab5ac1d19a"
           ],
-          "note": "Following the lines\nof a passing day."
+          "note": ""
         },
         {
           "layout": "duo",
@@ -47,7 +47,7 @@
             "11d7d0676635dfb6b1b5",
             "d8aea6029973241fee5c"
           ],
-          "note": "Between one shore and another."
+          "note": ""
         },
         {
           "layout": "triptych",
@@ -56,7 +56,7 @@
             "2c978b670f5b07077c93",
             "e5118ef6e214d86eecf3"
           ],
-          "note": "Fragments, held together by light."
+          "note": ""
         }
       ]
     },
@@ -70,7 +70,7 @@
             "87ffe682cb247327078a",
             "0da52a1c96189e2d07a8"
           ],
-          "note": "The quiet hours."
+          "note": ""
         },
         {
           "layout": "offset",
@@ -78,9 +78,13 @@
             "e415f92360a582cdede2",
             "f675df303d4f4cc518a4"
           ],
-          "note": "A little light,\nleft in the dark."
+          "note": ""
         }
       ]
     }
-  ]
+  ],
+  "home": {
+    "photo": "e1bdb895e7608f9c1b34",
+    "archive": "open-air"
+  }
 }
