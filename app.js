@@ -48,7 +48,7 @@ viewer.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
   if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1); }
 });
-fetch('photos.json').then(r => { if (!r.ok) throw Error('Unable to load photographs.'); return r.json(); }).then(data => {
+fetch('photos.json?v=20261102-photos1', { cache: 'no-store' }).then(r => { if (!r.ok) throw Error('Unable to load photographs.'); return r.json(); }).then(data => {
   photos = data.photos || [];
   $('demo-note').hidden = !data.demo;
   for (const series of ['', ...new Set(photos.map(p => p.series).filter(Boolean))]) {
