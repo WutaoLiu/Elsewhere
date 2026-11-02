@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id), version = '1.0.0', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = '1.0.1', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();

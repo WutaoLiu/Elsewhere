@@ -20,11 +20,10 @@
           "note": ""
         },
         {
-          "layout": "triptych",
+          "layout": "duo",
           "photos": [
             "51748e59f283857a18c1",
-            "2c978b670f5b07077c93",
-            "e5118ef6e214d86eecf3"
+            "66168038ada6ad5c002e"
           ],
           "note": ""
         },
@@ -37,10 +36,11 @@
           "note": ""
         },
         {
-          "layout": "duo",
+          "layout": "triptych",
           "photos": [
             "3812155731c261a93f27",
-            "66168038ada6ad5c002e"
+            "2c978b670f5b07077c93",
+            "e5118ef6e214d86eecf3"
           ],
           "note": ""
         },
