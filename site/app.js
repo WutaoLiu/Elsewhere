@@ -43,6 +43,7 @@ function screenSource(photo, layout = 'solo', index = 0) {
 }
 function setImage(image, photo, full = false, layout = 'solo', index = 0, priority = 'high') {
   image.alt = photo.alt || photo.title; image.width = photo.width; image.height = photo.height;
+  image.setAttribute('style',`aspect-ratio:${photo.width}/${photo.height}`);
   image.removeAttribute('srcset');
   image.dataset.photo = photo.id; image.dataset.full = full ? '1' : '0';
   if (full) { image.src = photo.full || photo.preview; return Promise.resolve(); }
