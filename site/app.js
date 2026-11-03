@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id), version = '1.0.2', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = '1.1.0', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
@@ -173,8 +173,17 @@ function preloadNeighbors(request) {
     if (page) prepareSpread(page,'low');
   }
 }
+function updateCredit(archive) {
+  const photographer=archive?.photographer || 'Wutao Liu';
+  $('archive-credit').hidden=!archive?.photographer;
+  $('archive-credit').textContent=archive?.photographer ? `Featuring ${photographer}` : '';
+  document.querySelectorAll('[data-photograph-rights]').forEach(node=>{
+    node.textContent=`Photographs © ${photographer}. All rights reserved.`;
+  });
+}
 function render() {
   const page = active.pages[pageIndex];
+  updateCredit(active);
   $('book-heading').hidden=false; $('pagination').hidden=false;
   $('archive-title').textContent = active.title; document.title = `${active.title} — Elsewhere`;
   $('archive-count').textContent = `${active.pages.flatMap(p => p.photos).length} photographs`;
@@ -201,6 +210,7 @@ function render() {
 function navigate(id, page) { location.hash = `${id}/${page + 1}`; }
 function renderHome() {
   active=null; pageIndex=0; ++renderRequest;
+  updateCredit(null);
   loadingArchive=null;++archiveLoadRequest;pinnedImages.clear();$('archive-load').hidden=true;
   document.title='Elsewhere — Wutao Liu';
   $('book-heading').hidden=true; $('pagination').hidden=true;
@@ -258,7 +268,7 @@ Promise.all([loadJSON('photos.json'),loadJSON('archives.json')]).then(([data,boo
   if (home.collage.some(id=>!photoMap.has(id))) throw Error('Invalid cover collage');
   if (!photoMap.has(home.page.photos[0]) || !archives.some(a=>a.id===home.archive)) throw Error('Invalid home cover');
   archives.forEach(a => {
-    const link=document.createElement('a');link.className='archive-link';link.dataset.archive=a.id;link.href=`#${a.id}/1`;
+    const link=document.createElement('a');link.className=a.photographer ? 'archive-link guest-archive' : 'archive-link';link.dataset.archive=a.id;link.href=`#${a.id}/1`;
     const title=document.createElement('span');title.textContent=a.title;link.append(title);$('archives').append(link);
   });
   $('status').hidden=true;window.addEventListener('hashchange',readRoute);readRoute();
