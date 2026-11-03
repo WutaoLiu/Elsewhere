@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id), version = '1.1.2', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = '1.1.3', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
@@ -229,7 +229,8 @@ function renderHome() {
     const title=document.createElement('a');title.className='home-title';title.href='#in-between/1';title.textContent='Elsewhere';
     title.setAttribute('aria-label','Elsewhere — enter the photographic archive');
     const signature=document.createElement('span');signature.className='home-signature';signature.textContent='Wutao Liu';
-    heading.append(title,signature);home.nodes.push(heading);
+    const tagline=document.createElement('p');tagline.className='home-tagline';tagline.textContent='Welcome to Elsewhere, a place you’ll never quite arrive at.';
+    heading.append(title,tagline,signature);home.nodes.push(heading);
   }
   replaceSpread(home.nodes,'spread spread-home spread-collage');
   for (const link of $('archives').children) link.removeAttribute('aria-current');
