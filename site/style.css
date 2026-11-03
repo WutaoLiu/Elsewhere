@@ -99,3 +99,8 @@
 /* Guest photographers */
 .archive-link.guest-archive{margin-top:27px}#archive-credit{font:italic 13px/1.6 Georgia,serif;color:#888;margin:4px 0 0}
 @media(max-width:700px){.archive-link.guest-archive{margin-top:12px}}
+
+.spread-duo.composition-first-dominant figure:first-child{flex:calc(var(--photo-ratio,1) * 1.6) 1 0;transform:translateY(-12px)}
+.spread-duo.composition-first-dominant figure:nth-child(2){flex:var(--photo-ratio,1) 1 0;max-width:calc(48vh * var(--photo-ratio,1));transform:translateY(18px)}
+.spread-duo.composition-first-dominant figure:nth-child(2) img{max-height:48vh}
+@media(max-width:700px){.spread-duo.composition-first-dominant figure:nth-child(2){max-width:calc(40vh * var(--photo-ratio,1))}.spread-duo.composition-first-dominant figure:nth-child(2) img{max-height:40vh}}
