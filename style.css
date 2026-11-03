@@ -88,3 +88,10 @@
 @media(max-width:700px){.spread.composition-left-high figure:first-child{transform:translateY(-10px)}.spread.composition-left-high figure:nth-child(2){transform:translateY(10px)}.spread.composition-right-high figure:first-child{transform:translateY(12px)}.spread.composition-right-high figure:nth-child(2){transform:translateY(-12px)}.spread-offset.composition-left-high figure:is(:first-child,:nth-child(2)),.spread-offset.composition-right-high figure:is(:first-child,:nth-child(2)){transform:none}}
 
 .copyright-notice{padding:0 0 35px;font-size:11px;line-height:1.9;color:#888}.copyright-notice p{margin:0 0 12px}.copyright-notice a{text-decoration:underline;text-underline-offset:3px}.copyright-notice a:hover{color:#222}
+
+/* Shared rights notice across the home, archive, Bio and full-image view. */
+.book{display:flex;flex-direction:column}.book>.copyright-notice{margin-top:auto;padding-top:28px;padding-bottom:0}
+.copyright-notice{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-shrink:0}.copyright-notice p{margin:0}.copyright-notice p:last-child{text-align:right}
+.viewer-rights{padding:12px 0 0;font-size:9px;line-height:1.5}
+@media(min-width:701px){.book>.spread{flex:1;min-height:calc(100dvh - 260px)}.book>.spread-collage{height:calc(100dvh - 185px);min-height:520px}}
+@media(max-width:700px){.copyright-notice{display:block;font-size:10px}.copyright-notice p:last-child{text-align:left;margin-top:8px}.viewer-rights{display:flex;font-size:8px;gap:12px}.viewer-rights p:last-child{margin:0;text-align:right}}
