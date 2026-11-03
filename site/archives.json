@@ -15,15 +15,6 @@
         {
           "layout": "duo",
           "photos": [
-            "11d7d0676635dfb6b1b5",
-            "d8aea6029973241fee5c"
-          ],
-          "note": "",
-          "composition": "right-high"
-        },
-        {
-          "layout": "duo",
-          "photos": [
             "51748e59f283857a18c1",
             "66168038ada6ad5c002e"
           ],
@@ -31,23 +22,30 @@
           "composition": "left-high"
         },
         {
+          "layout": "solo",
+          "photos": [
+            "3812155731c261a93f27"
+          ],
+          "note": "",
+          "composition": "solo"
+        },
+        {
           "layout": "duo",
           "photos": [
-            "9c733cf073bbf7cd3129",
-            "556b292d61455d8b179e"
+            "11d7d0676635dfb6b1b5",
+            "d8aea6029973241fee5c"
+          ],
+          "note": "",
+          "composition": "left-high"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "556b292d61455d8b179e",
+            "2c978b670f5b07077c93"
           ],
           "note": "",
           "composition": "right-high"
-        },
-        {
-          "layout": "triptych",
-          "photos": [
-            "3812155731c261a93f27",
-            "2c978b670f5b07077c93",
-            "9d9494ae8f9fa87313b8"
-          ],
-          "note": "",
-          "composition": "left-heavy"
         },
         {
           "layout": "duo",
@@ -56,7 +54,7 @@
             "c67c9e95f61a043b09c5"
           ],
           "note": "",
-          "composition": "right-high"
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -65,7 +63,7 @@
             "5e278d534333b57a504b"
           ],
           "note": "",
-          "composition": "left-high"
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -74,7 +72,7 @@
             "70b017880ebfa920cad7"
           ],
           "note": "",
-          "composition": "right-high"
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -83,13 +81,22 @@
             "b246ad8f99c941f8961d"
           ],
           "note": "",
-          "composition": "left-high"
+          "composition": "right-high"
         },
         {
           "layout": "duo",
           "photos": [
             "60ae0dad65cbe64cfc02",
             "40dd032156e42099bed8"
+          ],
+          "note": "",
+          "composition": "left-high"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "e5118ef6e214d86eecf3",
+            "fc9b3390b382ad0f70d2"
           ],
           "note": "",
           "composition": "right-high"
@@ -104,13 +111,12 @@
           "composition": "left-high"
         },
         {
-          "layout": "duo",
+          "layout": "solo",
           "photos": [
-            "e5118ef6e214d86eecf3",
-            "fc9b3390b382ad0f70d2"
+            "bc0900bd1a8362fed0f3"
           ],
           "note": "",
-          "composition": "right-high"
+          "composition": "solo"
         }
       ]
     },
@@ -133,7 +139,7 @@
             "64c3d9a2baca0e748d66"
           ],
           "note": "",
-          "composition": "right-high"
+          "composition": "left-high"
         },
         {
           "layout": "triptych",
@@ -162,16 +168,15 @@
             "433c70a36419d7601b30"
           ],
           "note": "",
-          "composition": "left-high"
+          "composition": "right-high"
         },
         {
-          "layout": "duo",
+          "layout": "solo",
           "photos": [
-            "1551d27dd6d2598f07fb",
             "001131b9bc83741904ac"
           ],
           "note": "",
-          "composition": "first-dominant"
+          "composition": "solo"
         },
         {
           "layout": "duo",
@@ -180,7 +185,7 @@
             "41ccca7d2398e5fa8754"
           ],
           "note": "",
-          "composition": "left-high"
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -189,7 +194,7 @@
             "bf84d454bb1018f455df"
           ],
           "note": "",
-          "composition": "right-high"
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -198,7 +203,7 @@
             "de1a85b7abcea5c02055"
           ],
           "note": "",
-          "composition": "left-high"
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -207,16 +212,15 @@
             "b69af653edf7bbc5d088"
           ],
           "note": "",
-          "composition": "right-high"
+          "composition": "left-high"
         },
         {
-          "layout": "duo",
+          "layout": "solo",
           "photos": [
-            "d1454b4f276bc290f7c2",
             "33560b77ed041c5b5e24"
           ],
           "note": "",
-          "composition": "left-high"
+          "composition": "solo"
         },
         {
           "layout": "duo",
@@ -225,7 +229,7 @@
             "878cfcacabe3ffc39441"
           ],
           "note": "",
-          "composition": "right-high"
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -234,7 +238,7 @@
             "c51c601ddda437ff863d"
           ],
           "note": "",
-          "composition": "left-high"
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -243,7 +247,7 @@
             "fc92539007663960fece"
           ],
           "note": "",
-          "composition": "right-high"
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -252,7 +256,7 @@
             "b0a2f72cfee49932e48f"
           ],
           "note": "",
-          "composition": "left-high"
+          "composition": "right-high"
         }
       ]
     },
@@ -260,15 +264,6 @@
       "id": "after-hours",
       "title": "After Hours",
       "pages": [
-        {
-          "layout": "duo",
-          "photos": [
-            "87ffe682cb247327078a",
-            "0da52a1c96189e2d07a8"
-          ],
-          "note": "",
-          "composition": "left-high"
-        },
         {
           "layout": "duo",
           "photos": [
@@ -281,11 +276,20 @@
         {
           "layout": "duo",
           "photos": [
+            "87ffe682cb247327078a",
+            "0da52a1c96189e2d07a8"
+          ],
+          "note": "",
+          "composition": "left-high"
+        },
+        {
+          "layout": "duo",
+          "photos": [
             "0858ce839e56c8e21457",
             "2801d1bff8eba39bde02"
           ],
           "note": "",
-          "composition": "left-high"
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -294,7 +298,7 @@
             "61e7ae1957cca4985517"
           ],
           "note": "",
-          "composition": "right-high"
+          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -303,7 +307,7 @@
             "f675df303d4f4cc518a4"
           ],
           "note": "",
-          "composition": "left-high"
+          "composition": "level"
         },
         {
           "layout": "solo",
@@ -312,6 +316,33 @@
           ],
           "note": "",
           "composition": "solo"
+        },
+        {
+          "layout": "offset",
+          "photos": [
+            "63a2b990265b68613a62",
+            "f0a4598c262910e916df"
+          ],
+          "note": "",
+          "composition": "right-high"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "c8d859054d65030a46d2",
+            "4e9980ba37edff58cbde"
+          ],
+          "note": "",
+          "composition": "left-high"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "93eca0d3d6a9a26e298b",
+            "f428a155305dc2c77bbd"
+          ],
+          "note": "",
+          "composition": "right-high"
         }
       ]
     },
