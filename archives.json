@@ -321,6 +321,74 @@
           "composition": "solo"
         }
       ]
+    },
+    {
+      "id": "other-eyes",
+      "title": "Other Eyes",
+      "photographer": "Octeven",
+      "pages": [
+        {
+          "layout": "solo",
+          "photos": [
+            "efeabb245708a44ad67b"
+          ],
+          "note": "",
+          "composition": "solo"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "151195543d98d0142281",
+            "7f1ab00b0788ef034285"
+          ],
+          "note": "",
+          "composition": "left-high"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "580189b4a15fc8f5011d",
+            "b9bb31477d84651bee87"
+          ],
+          "note": "",
+          "composition": "right-high"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "d5011b7e178e920cac86",
+            "414fe359425a73b03810"
+          ],
+          "note": "",
+          "composition": "left-high"
+        },
+        {
+          "layout": "solo",
+          "photos": [
+            "c6e32397582485e35432"
+          ],
+          "note": "",
+          "composition": "solo"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "77e3d4f36237268e52b9",
+            "65e9c0b306e30b12b7eb"
+          ],
+          "note": "",
+          "composition": "right-high"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "19e9d03efddaefa4f972",
+            "dd328903e6c821a9046f"
+          ],
+          "note": "",
+          "composition": "level"
+        }
+      ]
     }
   ],
   "home": {
