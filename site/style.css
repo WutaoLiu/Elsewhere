@@ -105,5 +105,5 @@
 .spread-duo.composition-first-dominant figure:nth-child(2) img{max-height:48vh}
 @media(max-width:700px){.spread-duo.composition-first-dominant figure:nth-child(2){max-width:calc(40vh * var(--photo-ratio,1))}.spread-duo.composition-first-dominant figure:nth-child(2) img{max-height:40vh}}
 
-.home-tagline{margin:6px 0 12px;max-width:460px;width:70vw;white-space:normal;text-align:center;text-wrap:balance;font:italic 14px/1.7 Georgia,serif;color:#253027;text-shadow:0 0 10px #fff,0 0 20px #fff}
-@media(max-width:700px){.home-tagline{font-size:12px;max-width:280px;margin:2px 0 8px}}
+.home-tagline{margin:6px 0 12px;max-width:640px;width:76vw;white-space:normal;text-align:center;text-wrap:balance;font:italic 20px/1.6 Georgia,serif;color:#253027;text-shadow:0 0 10px #fff,0 0 20px #fff}
+@media(max-width:700px){.home-tagline{font-size:16px;max-width:340px;margin:2px 0 8px}}
