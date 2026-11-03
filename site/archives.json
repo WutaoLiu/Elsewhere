@@ -109,15 +109,6 @@
           ],
           "note": "",
           "composition": "left-high"
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "bc0900bd1a8362fed0f3",
-            "8a78894d0ad483ac2279"
-          ],
-          "note": "",
-          "composition": "left-high"
         }
       ]
     },
@@ -241,6 +232,15 @@
           ],
           "note": "",
           "composition": "right-high"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "bc0900bd1a8362fed0f3",
+            "8a78894d0ad483ac2279"
+          ],
+          "note": "",
+          "composition": "left-high"
         },
         {
           "layout": "solo",
