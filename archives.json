@@ -15,8 +15,8 @@
         {
           "layout": "duo",
           "photos": [
-            "51748e59f283857a18c1",
-            "66168038ada6ad5c002e"
+            "20e2080777ae641ea020",
+            "c67c9e95f61a043b09c5"
           ],
           "note": "",
           "composition": "left-high"
@@ -41,20 +41,20 @@
         {
           "layout": "duo",
           "photos": [
+            "51748e59f283857a18c1",
+            "66168038ada6ad5c002e"
+          ],
+          "note": "",
+          "composition": "left-high"
+        },
+        {
+          "layout": "duo",
+          "photos": [
             "556b292d61455d8b179e",
             "2c978b670f5b07077c93"
           ],
           "note": "",
           "composition": "right-high"
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "20e2080777ae641ea020",
-            "c67c9e95f61a043b09c5"
-          ],
-          "note": "",
-          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -111,12 +111,13 @@
           "composition": "left-high"
         },
         {
-          "layout": "solo",
+          "layout": "duo",
           "photos": [
-            "bc0900bd1a8362fed0f3"
+            "bc0900bd1a8362fed0f3",
+            "8a78894d0ad483ac2279"
           ],
           "note": "",
-          "composition": "solo"
+          "composition": "left-high"
         }
       ]
     },
@@ -144,22 +145,21 @@
         {
           "layout": "triptych",
           "photos": [
-            "d2403599c4ef551acaab",
-            "a6b1de19096af2487758",
-            "88c0b25584b9f7eeab91"
-          ],
-          "note": "",
-          "composition": "left-heavy"
-        },
-        {
-          "layout": "triptych",
-          "photos": [
             "ff4f030b65a63012c515",
             "f9317bd133586d7eb7ea",
             "60f5068e44d789bfe9dc"
           ],
           "note": "",
           "composition": "right-heavy"
+        },
+        {
+          "layout": "duo",
+          "photos": [
+            "d2403599c4ef551acaab",
+            "a6b1de19096af2487758"
+          ],
+          "note": "",
+          "composition": "left-heavy"
         },
         {
           "layout": "duo",
@@ -171,12 +171,13 @@
           "composition": "right-high"
         },
         {
-          "layout": "solo",
+          "layout": "duo",
           "photos": [
-            "001131b9bc83741904ac"
+            "001131b9bc83741904ac",
+            "33560b77ed041c5b5e24"
           ],
           "note": "",
-          "composition": "solo"
+          "composition": "right-high"
         },
         {
           "layout": "duo",
@@ -186,15 +187,6 @@
           ],
           "note": "",
           "composition": "right-high"
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "8a78894d0ad483ac2279",
-            "bf84d454bb1018f455df"
-          ],
-          "note": "",
-          "composition": "left-high"
         },
         {
           "layout": "duo",
@@ -213,14 +205,6 @@
           ],
           "note": "",
           "composition": "left-high"
-        },
-        {
-          "layout": "solo",
-          "photos": [
-            "33560b77ed041c5b5e24"
-          ],
-          "note": "",
-          "composition": "solo"
         },
         {
           "layout": "duo",
@@ -252,11 +236,19 @@
         {
           "layout": "duo",
           "photos": [
-            "a72a5b059c764327ee4d",
-            "b0a2f72cfee49932e48f"
+            "88c0b25584b9f7eeab91",
+            "a72a5b059c764327ee4d"
           ],
           "note": "",
           "composition": "right-high"
+        },
+        {
+          "layout": "solo",
+          "photos": [
+            "b0a2f72cfee49932e48f"
+          ],
+          "note": "",
+          "composition": "solo"
         }
       ]
     },
@@ -264,6 +256,15 @@
       "id": "after-hours",
       "title": "After Hours",
       "pages": [
+        {
+          "layout": "duo",
+          "photos": [
+            "3d02548450f119a307bf",
+            "f675df303d4f4cc518a4"
+          ],
+          "note": "",
+          "composition": "level"
+        },
         {
           "layout": "duo",
           "photos": [
@@ -285,8 +286,8 @@
         {
           "layout": "duo",
           "photos": [
-            "0858ce839e56c8e21457",
-            "2801d1bff8eba39bde02"
+            "93eca0d3d6a9a26e298b",
+            "f428a155305dc2c77bbd"
           ],
           "note": "",
           "composition": "right-high"
@@ -299,23 +300,6 @@
           ],
           "note": "",
           "composition": "left-high"
-        },
-        {
-          "layout": "duo",
-          "photos": [
-            "3d02548450f119a307bf",
-            "f675df303d4f4cc518a4"
-          ],
-          "note": "",
-          "composition": "level"
-        },
-        {
-          "layout": "solo",
-          "photos": [
-            "09ad243f90e59d1bb91e"
-          ],
-          "note": "",
-          "composition": "solo"
         },
         {
           "layout": "offset",
@@ -338,8 +322,8 @@
         {
           "layout": "duo",
           "photos": [
-            "93eca0d3d6a9a26e298b",
-            "f428a155305dc2c77bbd"
+            "0858ce839e56c8e21457",
+            "2801d1bff8eba39bde02"
           ],
           "note": "",
           "composition": "right-high"
