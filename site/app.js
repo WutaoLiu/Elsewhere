@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id), version = '1.1.5', viewer = $('viewer');
+const $ = id => document.getElementById(id), version = '1.1.8', viewer = $('viewer');
 let archives = [], photoMap = new Map(), active = null, pageIndex = 0, home = null;
 let viewerPhotos = [], viewerIndex = 0, opener = null, zoomed = false, imageRequest = 0;
 const imageCache = new Map(), imageQueue = [], spreadCache = new Map();
@@ -235,7 +235,31 @@ function renderHome() {
   replaceSpread(home.nodes,'spread spread-home spread-collage');
   for (const link of $('archives').children) link.removeAttribute('aria-current');
 }
+function renderOtherEyes() {
+  active=null;pageIndex=0;++renderRequest;
+  loadingArchive=null;++archiveLoadRequest;pinnedImages.clear();
+  $('archive-load').hidden=true;if($('page-note')) $('page-note').hidden=true;
+  updateCredit(null);document.title='Other Eyes — Elsewhere';
+  $('book-heading').hidden=false;$('archive-title').textContent='Other Eyes';
+  $('archive-count').hidden=true;$('pagination').hidden=true;
+  const authors=document.createElement('div');authors.className='other-eyes-authors';
+  for(const author of [
+    {name:'Octeven',description:'Photographs hosted here · 站内影集',href:'#other-eyes/1',label:'View photographs →'},
+    {name:'retiaw',description:'A Little Longer · 独立影集',href:'https://retiaw.github.io/a-little-longer/',label:'Visit the collection ↗'}
+  ]) {
+    const link=document.createElement('a');link.className='other-eyes-author';link.href=author.href;
+    const name=document.createElement('h2');name.textContent=author.name;
+    const description=document.createElement('p');description.textContent=author.description;
+    const action=document.createElement('span');action.textContent=author.label;
+    link.append(name,description,action);authors.append(link);
+  }
+  replaceSpread([authors],'spread other-eyes-index');
+  for(const link of $('archives').children) {
+    if(link.dataset.archive==='other-eyes')link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
+  }
+}
 function readRoute() {
+  if (location.hash==='#other-eyes' || location.hash==='#other-eyes/') {renderOtherEyes();return;}
   if (!location.hash || location.hash==='#home') { renderHome();return; }
   const [rawId, raw] = location.hash.slice(1).split('/'); const id = ({'open-air':'wandering','street-notes':'in-between'})[rawId] || rawId; active = archives.find(a => a.id === id) || archives[0];
   const n = Number(raw); pageIndex = Number.isInteger(n) ? Math.max(0,Math.min(active.pages.length - 1,n - 1)) : 0; render();
@@ -269,7 +293,7 @@ Promise.all([loadJSON('photos.json'),loadJSON('archives.json')]).then(([data,boo
   if (home.collage.some(id=>!photoMap.has(id))) throw Error('Invalid cover collage');
   if (!photoMap.has(home.page.photos[0]) || !archives.some(a=>a.id===home.archive)) throw Error('Invalid home cover');
   archives.forEach(a => {
-    const link=document.createElement('a');link.className=a.photographer ? 'archive-link guest-archive' : 'archive-link';link.dataset.archive=a.id;link.href=`#${a.id}/1`;
+    const link=document.createElement('a');link.className=a.photographer ? 'archive-link guest-archive' : 'archive-link';link.dataset.archive=a.id;link.href=a.id==='other-eyes' ? '#other-eyes' : `#${a.id}/1`;
     const title=document.createElement('span');title.textContent=a.title;link.append(title);$('archives').append(link);
   });
   $('status').hidden=true;window.addEventListener('hashchange',readRoute);readRoute();
