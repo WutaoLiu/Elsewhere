@@ -244,14 +244,12 @@ function renderOtherEyes() {
   $('archive-count').hidden=true;$('pagination').hidden=true;
   const authors=document.createElement('div');authors.className='other-eyes-authors';
   for(const author of [
-    {name:'Octeven',description:'Photographs hosted here · 站内影集',href:'#other-eyes/1',label:'View photographs →'},
-    {name:'retiaw',description:'A Little Longer · 独立影集',href:'https://retiaw.github.io/a-little-longer/',label:'Visit the collection ↗'}
+    {name:'Octeven',href:'#other-eyes/1'},
+    {name:'retiaw',href:'https://retiaw.github.io/a-little-longer/'}
   ]) {
     const link=document.createElement('a');link.className='other-eyes-author';link.href=author.href;
     const name=document.createElement('h2');name.textContent=author.name;
-    const description=document.createElement('p');description.textContent=author.description;
-    const action=document.createElement('span');action.textContent=author.label;
-    link.append(name,description,action);authors.append(link);
+    link.append(name);authors.append(link);
   }
   replaceSpread([authors],'spread other-eyes-index');
   for(const link of $('archives').children) {
