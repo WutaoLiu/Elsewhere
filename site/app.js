@@ -244,12 +244,13 @@ function renderOtherEyes() {
   $('archive-count').hidden=true;$('pagination').hidden=true;
   const authors=document.createElement('div');authors.className='other-eyes-authors';
   for(const author of [
-    {name:'Octeven',href:'#other-eyes/1'},
-    {name:'retiaw',href:'https://retiaw.github.io/a-little-longer/'}
+    {name:'Octeven',href:'#other-eyes/1',image:'assets/photos/efeabb245708a44ad67b-screen.webp',alt:'A kite above a lighthouse at dusk — photograph by Octeven',width:3168,height:4752},
+    {name:'retiaw',href:'https://retiaw.github.io/a-little-longer/',image:'assets/featured/a-little-longer.webp',alt:'Sunrise by the sea — photograph by retiaw',width:960,height:1518}
   ]) {
     const link=document.createElement('a');link.className='other-eyes-author';link.href=author.href;
     const name=document.createElement('h2');name.textContent=author.name;
-    link.append(name);authors.append(link);
+    const image=new Image();image.src=author.image;image.alt=author.alt;image.width=author.width;image.height=author.height;image.decoding='async';
+    link.append(image,name);authors.append(link);
   }
   replaceSpread([authors],'spread other-eyes-index');
   for(const link of $('archives').children) {
